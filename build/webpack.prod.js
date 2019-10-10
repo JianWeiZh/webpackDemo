@@ -2,6 +2,7 @@ const webpack = require('webpack')
 const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const common = require('./webpack.common')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
 module.exports = merge(common, {
   mode: 'production',
@@ -12,6 +13,10 @@ module.exports = merge(common, {
     }),
     new webpack.DefinePlugin({
       'process.env.NODE_ENV': JSON.stringify('production')
+    }),
+    new MiniCssExtractPlugin({
+      filename: '[name].[contenthash].css',
+      chunkFilename: '[name].[contenthash].css'
     })
   ],
   optimization: {
@@ -24,5 +29,19 @@ module.exports = merge(common, {
         }
       }
     }
+  },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader"
+        ]
+      }
+    ]
+  },
+  output: {
+    filename: "[name].[contenthash].js"
   }
 })
