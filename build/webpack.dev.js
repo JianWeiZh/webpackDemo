@@ -15,7 +15,6 @@ module.exports = merge(common, {
     proxy: {}
   },
   plugins: [
-    new webpack.NamedModulesPlugin(),
     new webpack.HotModuleReplacementPlugin()
   ],
   module: {

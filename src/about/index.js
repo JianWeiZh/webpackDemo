@@ -2,7 +2,7 @@ import "./about.css"
 import "./../home/home.css"
 
 var oDiv = document.createElement('div')
-oDiv.innerText = 'hello webpack'
+oDiv.innerText = API_CONFIG.FOO_API
 document.body.appendChild(oDiv)
 
 export function cs() {
