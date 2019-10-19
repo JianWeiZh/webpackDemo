@@ -1,5 +1,6 @@
 import './home.css'
 import './../about/about.css'
+import './index.scss'
 export function cs01() {
   console.log(78911)
   const arr = [1,2,3,4,5,6,7,8,9]

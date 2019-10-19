@@ -2,6 +2,7 @@ import "./about.css"
 import "./../home/home.css"
 
 const oDiv = document.createElement('div')
+oDiv.className = 'box'
 oDiv.innerText = API_CONFIG.FOO_API
 document.body.appendChild(oDiv)
 

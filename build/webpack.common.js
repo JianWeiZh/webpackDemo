@@ -9,7 +9,7 @@ module.exports = {
     main: "./src/index.js"
   },
   plugins: [
-    new CleanWebpackPlugin(),
+    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "webpackDemo",
       filename: "index.html"

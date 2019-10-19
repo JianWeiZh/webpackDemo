@@ -1,6 +1,7 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
+const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const common = require('./webpack.common')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
 
@@ -8,6 +9,7 @@ module.exports = merge(common, {
   mode: 'production',
   devtool: 'false', // 生产环境关闭sourceMap，减小包的体积
   plugins: [
+    new CleanWebpackPlugin(),
     new UglifyJSPlugin({
       sourceMap: true
     }),
@@ -52,6 +54,14 @@ module.exports = merge(common, {
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader"
+        ]
+      },
+      {
+        test: /\.scss$/,
+        use: [
+          MiniCssExtractPlugin.loader,
+          "css-loader",
+          "sass-loader"
         ]
       }
     ]
