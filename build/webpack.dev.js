@@ -20,10 +20,11 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.css$/,
+        test: /\.css/,
         use: [
-          "style-loader",
-          "css-loader"
+          {loader: "style-loader"},
+          {loader: "css-loader"},
+          {loader: "postcss-loader"}
         ]
       },
       {
@@ -34,7 +35,12 @@ module.exports = merge(common, {
           },{
             loader: "css-loader"
           },{
-            loader: "sass-loader"
+            loader: "postcss-loader"
+          },{
+            loader: "sass-loader",
+            options: {
+              implementation: require("dart-sass")
+            }
           }
         ]
       }

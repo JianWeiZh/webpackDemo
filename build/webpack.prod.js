@@ -50,18 +50,17 @@ module.exports = merge(common, {
   module: {
     rules: [
       {
-        test: /\.css$/,
-        use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader"
-        ]
-      },
-      {
-        test: /\.scss$/,
+        test: /\.(sa|sc|c)ss$/,
         use: [
           MiniCssExtractPlugin.loader,
           "css-loader",
-          "sass-loader"
+          "postcss-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("dart-sass")
+            }
+          }
         ]
       }
     ]
