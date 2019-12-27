@@ -4,6 +4,7 @@ const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const common = require('./webpack.common')
 const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const path = require('path')
 
 module.exports = merge(common, {
   mode: 'production',
@@ -23,26 +24,34 @@ module.exports = merge(common, {
   ],
   optimization: {
     splitChunks: { // 代码分割
+      chunks: "async",
+      minSize: 30000,
+      minChunks: 1,
+      maxAsyncRequests: 5,
+      maxInitialRequests: 3,
+      automaticNameDelimiter: '~',
+      name: true,
       cacheGroups: {
+        styles: {
+          name: 'css/main',
+          test: /\.(sa|sc|c)ss$/,
+          chunks: 'all',
+          enforce: true,
+          priority: 20,
+        },
         commons: {
-          name: "commons",
-          chunks: "initial",
-          minSize: 30000, // 模块的最小体积
-          minChunks: 1, // 模块的最小被引用次数
-          // maxAsyncRequests: 5, // 按需加载的最大并行请求数
-          // maxInitialRequests: 3, // 一个入口最大并行请求数
-          // automaticNameDelimiter: '~', // 文件名的连接符
-          // cacheGroups: { // 缓存组
-          //   vendors: {
-          //     test: /[\\/]node_modules[\\/]/,
-          //     priority: -10
-          //   },
-          //   default: {
-          //     minChunks: 2,
-          //     priority: -20,
-          //     reuseExistingChunk: true
-          //   }
-          // }
+          test: /[\\/]node_modules[\\/]/,
+          name: "vendors",
+          chunks: "all"
+        },
+        vendors: {
+          test: /[\\/]node_modules[\\/]/,
+          priority: -10
+        },
+        default: {
+          minChunks: 2,
+          priority: -20,
+          reuseExistingChunk: true
         }
       }
     }

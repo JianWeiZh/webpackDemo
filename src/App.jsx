@@ -1,6 +1,6 @@
 import React from 'react'
-import Home from '@/home'
-import About from '@/about'
+import Home from '@/views/home'
+import About from '@/views/about'
 
 class App extends React.Component {
   constructor(props){
