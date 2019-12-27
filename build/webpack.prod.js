@@ -66,6 +66,6 @@ module.exports = merge(common, {
     ]
   },
   output: {
-    filename: "[name].[contenthash].js"
+    filename: "js/[name].[contenthash].js"
   }
 })
