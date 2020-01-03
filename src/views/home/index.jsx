@@ -1,11 +1,17 @@
 import React from 'react'
-import './index.scss'
-import './home.css'
+import style from  './index.scss'
 
 class Home extends React.Component{
+  constructor (props) {
+    super(props)
+  }
+  goBack() {
+    this.props.history.go(-1)
+  }
   render() {
-    return <div>
+    return <div className={style.box}>
       我是home页
+      <button onClick={() => this.goBack()}>返回</button>
     </div>
   }
 }

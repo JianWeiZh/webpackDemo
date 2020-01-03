@@ -1,6 +1,5 @@
 import React from 'react'
-import Home from '@/views/home'
-import About from '@/views/about'
+import style from './app.scss'
 
 class App extends React.Component {
   constructor(props){
@@ -22,11 +21,14 @@ class App extends React.Component {
     console.log('componentWillUnmount')
   }
 
+  goNext(path) {
+    this.props.history.push(`/${path}`)
+  }
+
   render() {
-    return <div>
-      Hello word
-      <Home />
-      <About></About>
+    return <div className={style.app}>
+      <span className={style.labelItem} onClick={() => this.goNext('home')}>home</span>
+      <span className={style.labelItem} onClick={() => this.goNext('about')}>about</span>
     </div>
   }
 }

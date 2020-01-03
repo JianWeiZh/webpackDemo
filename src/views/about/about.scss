@@ -1,6 +1,9 @@
-div{
+.about{
     width: 200px;
     height: 200px;
     background-color: green;
     color: #fff;
+    .title{
+      font-weight: normal;
+    }
 }

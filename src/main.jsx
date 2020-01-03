@@ -1,5 +1,6 @@
 import React from 'react'
 import ReactDom from 'react-dom'
-import App from './App'
+// import App from '@/App'
+import Routers from '@/router'
 
-ReactDom.render(<App/>, document.querySelector('#app'))
+ReactDom.render(<Routers/>, document.querySelector('#app'))

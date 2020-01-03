@@ -19,7 +19,8 @@ module.exports = merge(common, {
     }),
     new MiniCssExtractPlugin({
       filename: '[name].[contenthash].css',
-      chunkFilename: '[name].[contenthash].css'
+      chunkFilename: '[name].[contenthash].css',
+      ignoreOrder: false // 启用以删除有关顺序冲突的警告
     })
   ],
   optimization: {
@@ -38,6 +39,7 @@ module.exports = merge(common, {
           chunks: 'all',
           enforce: true,
           priority: 20,
+          reuseExistingChunk: true
         },
         commons: {
           test: /[\\/]node_modules[\\/]/,
@@ -61,8 +63,20 @@ module.exports = merge(common, {
       {
         test: /\.(sa|sc|c)ss$/,
         use: [
-          MiniCssExtractPlugin.loader,
-          "css-loader",
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '/public/path/to/',
+              esModule: true,
+            }
+          },{
+            loader: "css-loader",
+            options: {
+              modules: true,
+              // localIdentName: '[path][name][hash:base64:5]',
+              sourceMap: false
+            }
+          },
           "postcss-loader",
           {
             loader: "sass-loader",

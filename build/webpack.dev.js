@@ -12,7 +12,8 @@ module.exports = merge(common, {
     compress: true,
     host: "localhost",
     port: 8080,
-    proxy: {}
+    proxy: {},
+    historyApiFallback: true
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin()
@@ -23,7 +24,18 @@ module.exports = merge(common, {
         test: /\.css/,
         use: [
           {loader: "style-loader"},
-          {loader: "css-loader"},
+          {
+            loader: "css-loader",
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                context: path.resolve(__dirname, 'src'),
+                hashPrefix: 'my-custom-hash',
+              },
+              sourceMap: true
+            }
+          },
           {loader: "postcss-loader"}
         ]
       },
@@ -33,7 +45,16 @@ module.exports = merge(common, {
           {
             loader: "style-loader"
           },{
-            loader: "css-loader"
+            loader: "css-loader",
+            options: {
+              modules: {
+                mode: 'local',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                context: path.resolve(__dirname, 'src'),
+                hashPrefix: 'my-custom-hash',
+              },
+              sourceMap: true
+            }
           },{
             loader: "postcss-loader"
           },{
