@@ -72,8 +72,12 @@ module.exports = merge(common, {
           },{
             loader: "css-loader",
             options: {
-              modules: true,
-              // localIdentName: '[path][name][hash:base64:5]',
+              modules:  {
+                mode: 'local',
+                localIdentName: '[path][name]__[local]--[hash:base64:5]',
+                context: path.resolve(__dirname, 'src'),
+                hashPrefix: 'my-custom-hash',
+              },
               sourceMap: false
             }
           },
