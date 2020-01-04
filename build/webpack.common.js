@@ -1,7 +1,6 @@
 const webpack = require('webpack')
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const apiConfig = require('./api')
 
 module.exports = {
@@ -18,7 +17,6 @@ module.exports = {
     extensions: ['.js', '.jsx', '.json']
   },
   plugins: [
-    // new CleanWebpackPlugin(),
     new HtmlWebpackPlugin({
       title: "webpack-react-demo",
       filename: "index.html",
@@ -27,7 +25,7 @@ module.exports = {
         //是否去除空格，默认false
         collapseWhitespace: true,
         //是否压缩html里的css（使用clean-css进行的压缩） 默认值false；
-        minifyCSS: true,
+        minifyCSS: process.env.NODE_ENV === 'development',
 
         //是否压缩html里的js（使用uglify-js进行的压缩）
         minifyJS: true,
