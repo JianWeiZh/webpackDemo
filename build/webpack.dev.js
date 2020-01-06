@@ -67,6 +67,9 @@ module.exports = merge(common, {
       }
     ]
   },
+  optimization: {
+    usedExports: true
+  },
   output: {
     filename: "[name].[hash].js"
   }

@@ -1,5 +1,6 @@
 {
   "name": "webpackDemo",
+  "sideEffects": false,
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
@@ -17,6 +18,7 @@
     "@babel/runtime": "^7.7.7",
     "babel-loader": "^8.0.0-beta.0",
     "clean-webpack-plugin": "^3.0.0",
+    "compression-webpack-plugin": "^3.0.1",
     "cross-env": "^6.0.3",
     "css-loader": "^3.2.0",
     "csv-loader": "^3.0.2",
@@ -24,6 +26,7 @@
     "file-loader": "^4.2.0",
     "html-webpack-plugin": "^3.2.0",
     "mini-css-extract-plugin": "^0.8.0",
+    "optimize-css-assets-webpack-plugin": "^5.0.3",
     "path-key": "^3.1.0",
     "postcss": "^7.0.25",
     "postcss-loader": "^3.0.0",
