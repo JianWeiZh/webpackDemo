@@ -18,58 +18,6 @@ module.exports = merge(common, {
   plugins: [
     new webpack.HotModuleReplacementPlugin()
   ],
-  module: {
-    rules: [
-      {
-        test: /\.css/,
-        use: [
-          {loader: "style-loader"},
-          {
-            loader: "css-loader",
-            options: {
-              modules: {
-                mode: 'local',
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                context: path.resolve(__dirname, 'src'),
-                hashPrefix: 'my-custom-hash',
-              },
-              sourceMap: true
-            }
-          },
-          {loader: "postcss-loader"}
-        ]
-      },
-      {
-        test: /\.scss$/,
-        use: [
-          {
-            loader: "style-loader"
-          },{
-            loader: "css-loader",
-            options: {
-              modules: {
-                mode: 'local',
-                localIdentName: '[path][name]__[local]--[hash:base64:5]',
-                context: path.resolve(__dirname, 'src'),
-                hashPrefix: 'my-custom-hash',
-              },
-              sourceMap: true
-            }
-          },{
-            loader: "postcss-loader"
-          },{
-            loader: "sass-loader",
-            options: {
-              implementation: require("dart-sass")
-            }
-          }
-        ]
-      }
-    ]
-  },
-  optimization: {
-    usedExports: true
-  },
   output: {
     filename: "[name].[hash].js"
   }

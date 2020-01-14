@@ -1,5 +1,5 @@
 import React from 'react'
-import style from  './index.scss'
+import style from './index.scss'
 
 class Home extends React.Component{
   constructor (props) {
@@ -10,6 +10,7 @@ class Home extends React.Component{
   }
   render() {
     return <div className={style.box}>
+      <div className="iconfont iconright">按钮</div>
       我是home页
       <button onClick={() => this.goBack()}>返回</button>
     </div>

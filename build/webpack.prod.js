@@ -3,10 +3,7 @@ const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
 const { CleanWebpackPlugin } = require("clean-webpack-plugin")
 const common = require('./webpack.common')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
 const CompressionWebpackPlugin = require("compression-webpack-plugin")
-const path = require('path')
 
 module.exports = merge(common, {
   mode: 'production',
@@ -22,11 +19,6 @@ module.exports = merge(common, {
       test: new RegExp('\\.(js|css)$'),
       threshold: 10240,
       minRatio: 0.8
-    }),
-    new MiniCssExtractPlugin({
-      filename: 'css/[name].[contenthash].css',
-      chunkFilename: 'css/[name].[contenthash].css',
-      ignoreOrder: false // 启用以删除有关顺序冲突的警告
     })
   ],
   optimization: {
@@ -45,8 +37,7 @@ module.exports = merge(common, {
           },
           warnings: false
         }
-      }),
-      new OptimizeCSSAssetsPlugin({})
+      })
     ],
     splitChunks: { // 代码分割
       chunks: "async",
@@ -73,40 +64,6 @@ module.exports = merge(common, {
         }
       }
     }
-  },
-  module: {
-    rules: [
-      {
-        test: /\.(sa|sc|c)ss$/,
-        use: [
-          {
-            loader: MiniCssExtractPlugin.loader,
-            options: {
-              publicPath: '../',
-              esModule: true,
-            }
-          },{
-            loader: "css-loader",
-            options: {
-              modules:  {
-                mode: 'local',
-                localIdentName: '[path][name][hash:base64:5]',
-                context: path.resolve(__dirname, 'src'),
-                hashPrefix: 'my-custom-hash',
-              },
-              sourceMap: false
-            }
-          },
-          "postcss-loader",
-          {
-            loader: "sass-loader",
-            options: {
-              implementation: require("dart-sass")
-            }
-          }
-        ]
-      }
-    ]
   },
   output: {
     filename: "js/[name].[contenthash].js"

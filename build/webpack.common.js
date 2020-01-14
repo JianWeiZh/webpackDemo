@@ -2,6 +2,10 @@ const webpack = require('webpack')
 const path = require("path")
 const HtmlWebpackPlugin = require("html-webpack-plugin")
 const apiConfig = require('./api')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin")
+const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
+// const isProduction = process.env.NODE_ENV === 'production'
+const devMode = process.env.NODE_ENV === 'development'
 
 module.exports = {
   entry: {
@@ -12,9 +16,9 @@ module.exports = {
   },
   resolve: {
     alias: {
-      '@': path.resolve(__dirname, './../src')
+      '@': path.join(__dirname, '../src')
     },
-    extensions: ['.js', '.jsx', '.json']
+    extensions: ['.js', '.jsx', '.css', '.scss', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -25,7 +29,7 @@ module.exports = {
         //是否去除空格，默认false
         collapseWhitespace: true,
         //是否压缩html里的css（使用clean-css进行的压缩） 默认值false；
-        minifyCSS: process.env.NODE_ENV === 'development',
+        minifyCSS: devMode,
 
         //是否压缩html里的js（使用uglify-js进行的压缩）
         minifyJS: true,
@@ -35,20 +39,74 @@ module.exports = {
     }),
     new webpack.DefinePlugin({ // 环境变量配置 调用方法：API_CONFIG.变量
       REACT_APP: JSON.stringify(apiConfig)
+    }),
+    new MiniCssExtractPlugin({
+      filename: 'css/[name].[contenthash].css',
+      chunkFilename: 'css/[name].[contenthash].css',
+      ignoreOrder: false // 启用以删除有关顺序冲突的警告
     })
   ],
+  optimization: {
+    usedExports: devMode,
+    minimizer: [
+      new OptimizeCSSAssetsPlugin({})
+    ]
+  },
   module: {
     rules: [
       {
         test: /\.(png|svg|jpg|gif)$/,
-        use: [
-          'file-loader'
-        ]
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: 'img/[hash:7].[name].[ext]',
+            publicPath: '/dist/'
+          }
+        }
       },
       {
         test: /\.(woff|woff2|eot|ttf|otf)$/,
+        use: {
+          loader: 'url-loader',
+          options: {
+            limit: 10000,
+            name: 'fonts/[hash:7].[name].[ext]',
+            publicPath: '/dist/'
+          }
+        }
+      },
+      {
+        test: /\.(sa|sc|c)ss$/,
         use: [
-          'file-loader'
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+              esModule: true,
+              hmr: devMode,
+              reloadAll: devMode
+            }
+          },{
+            loader: "css-loader",
+            options: {
+              modules:  {
+                mode: 'local',
+                localIdentName: '[path][name][hash:base64:5]',
+                context: path.resolve(__dirname, 'src'),
+                hashPrefix: 'my-custom-hash',
+              },
+              sourceMap: devMode
+            }
+          },
+          "postcss-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("dart-sass"),
+              sourceMap: devMode
+            }
+          }
         ]
       },
       {

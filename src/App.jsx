@@ -29,6 +29,7 @@ class App extends React.Component {
     return <div className={style.app}>
       <span className={style.labelItem} onClick={() => this.goNext('home')}>home</span>
       <span className={style.labelItem} onClick={() => this.goNext('about')}>about</span>
+      <div className="iconfont iconright">按钮</div>
     </div>
   }
 }
