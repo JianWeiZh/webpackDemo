@@ -2,6 +2,9 @@ import React from 'react'
 import { BrowserRouter as Router, Route, Switch } from 'react-router-dom'
 import loadable from '../utils/loadable'
 import routers from './routers'
+import OpJsSdk from '@/utils/optimus-js-sdk'
+import MyContext from '@/components/MyContext'
+import ErrorBoundaries from '@/components/ErrorBoundaries'
 
 class Routers extends React.Component {
   constructor (props) {
@@ -16,16 +19,20 @@ class Routers extends React.Component {
   }
 
   render() {
-    return <Router>
-        <Switch>
-          {this.state.routers.map((item) => {
-            return item.path === '/' ?
-              <Route path={item.path} key={item.path} {...item.meta} exact component={loadable(item.component)} />
-              :
-              <Route path={item.path} key={item.path} {...item.meta} component={loadable(item.component)} />
-          })}
-        </Switch>
-      </Router>
+    return <ErrorBoundaries>
+      <MyContext.Provider value={OpJsSdk}>
+        <Router>
+          <Switch>
+            {this.state.routers.map((item) => {
+              return item.path === '/' ?
+                <Route path={item.path} key={item.path} {...item.meta} exact component={loadable(item.component)} />
+                :
+                <Route path={item.path} key={item.path} {...item.meta} component={loadable(item.component)} />
+            })}
+          </Switch>
+        </Router>
+      </MyContext.Provider>
+    </ErrorBoundaries>
   }
 }
 

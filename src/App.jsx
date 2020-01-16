@@ -1,12 +1,17 @@
 import React from 'react'
 import style from './app.scss'
+import MyContext from '@/components/MyContext'
 
 class App extends React.Component {
   constructor(props){
     super(props)
   }
+
+  static contextType = MyContext
+
   componentDidMount() {
-    console.log('componentDidMount')
+    let value = this.context
+    console.log(value)
   }
 
   shouldComponentUpdate(nextProps, nextState, nextContext) {
@@ -27,10 +32,10 @@ class App extends React.Component {
 
   render() {
     return <div className={style.app}>
-      <span className={style.labelItem} onClick={() => this.goNext('home')}>home</span>
-      <span className={style.labelItem} onClick={() => this.goNext('about')}>about</span>
-      <div className="iconfont iconright">按钮</div>
-    </div>
+        <span className={style.labelItem} onClick={() => this.goNext('home')}>home</span>
+        <span className={style.labelItem} onClick={() => this.goNext('about')}>about</span>
+        <div className="iconfont iconright">按钮</div>
+      </div>
   }
 }
 

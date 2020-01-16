@@ -1,9 +1,9 @@
 const webpack = require('webpack')
 const merge = require('webpack-merge')
 const UglifyJSPlugin = require('uglifyjs-webpack-plugin')
-const { CleanWebpackPlugin } = require("clean-webpack-plugin")
+const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 const common = require('./webpack.common')
-const CompressionWebpackPlugin = require("compression-webpack-plugin")
+const CompressionWebpackPlugin = require('compression-webpack-plugin')
 
 module.exports = merge(common, {
   mode: 'production',
@@ -40,7 +40,7 @@ module.exports = merge(common, {
       })
     ],
     splitChunks: { // 代码分割
-      chunks: "async",
+      chunks: 'async',
       minSize: 30000,
       minChunks: 1,
       maxAsyncRequests: 5,
@@ -50,8 +50,8 @@ module.exports = merge(common, {
       cacheGroups: {
         commons: {
           test: /[\\/]node_modules[\\/]/,
-          name: "vendors",
-          chunks: "all"
+          name: 'vendors',
+          chunks: 'all'
         },
         vendors: {
           test: /[\\/]node_modules[\\/]/,
@@ -66,6 +66,6 @@ module.exports = merge(common, {
     }
   },
   output: {
-    filename: "js/[name].[contenthash].js"
+    filename: 'js/[name].[contenthash].js'
   }
 })

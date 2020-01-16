@@ -1,15 +1,14 @@
 const webpack = require('webpack')
-const path = require("path")
-const HtmlWebpackPlugin = require("html-webpack-plugin")
+const path = require('path')
+const HtmlWebpackPlugin = require('html-webpack-plugin')
 const apiConfig = require('./api')
-const MiniCssExtractPlugin = require("mini-css-extract-plugin")
-const OptimizeCSSAssetsPlugin = require("optimize-css-assets-webpack-plugin")
-// const isProduction = process.env.NODE_ENV === 'production'
+const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin')
 const devMode = process.env.NODE_ENV === 'development'
 
 module.exports = {
   entry: {
-    main: "./src/main.jsx"
+    main: './src/main.jsx'
   },
   output: {
     path: path.resolve(__dirname, '../dist')
@@ -22,8 +21,8 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      title: "webpack-react-demo",
-      filename: "index.html",
+      title: 'webpack-react-demo',
+      filename: 'index.html',
       template: path.resolve(__dirname, './../src/index.ejs'),
       minify: {
         //是否去除空格，默认false
@@ -88,7 +87,7 @@ module.exports = {
               reloadAll: devMode
             }
           },{
-            loader: "css-loader",
+            loader: 'css-loader',
             options: {
               modules:  {
                 mode: 'local',
@@ -99,11 +98,11 @@ module.exports = {
               sourceMap: devMode
             }
           },
-          "postcss-loader",
+          'postcss-loader',
           {
-            loader: "sass-loader",
+            loader: 'sass-loader',
             options: {
-              implementation: require("dart-sass"),
+              implementation: require('dart-sass'),
               sourceMap: devMode
             }
           }
@@ -124,6 +123,6 @@ module.exports = {
     ]
   },
   performance: {
-    hints: "warning"
+    hints: 'warning'
   }
 }
