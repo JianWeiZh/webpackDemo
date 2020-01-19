@@ -1,6 +1,13 @@
 .box{
-  width: 500px;
-  height: 500px;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
   color: yellowgreen;
   background: url("./bgImg.jpg") no-repeat left top / cover;
+  .content{
+    flex: auto;
+    height: auto;
+    overflow: auto;
+  }
 }

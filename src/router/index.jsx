@@ -25,9 +25,9 @@ class Routers extends React.Component {
           <Switch>
             {this.state.routers.map((item) => {
               return item.path === '/' ?
-                <Route path={item.path} key={item.path} {...item.meta} exact component={loadable(item.component)} />
+                <Route path={item.path} key={item.path} exact component={loadable(item.component)} />
                 :
-                <Route path={item.path} key={item.path} {...item.meta} component={loadable(item.component)} />
+                <Route path={item.path} key={item.path} component={loadable(item.component)} />
             })}
           </Switch>
         </Router>

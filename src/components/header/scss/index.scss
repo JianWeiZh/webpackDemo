@@ -1,0 +1,84 @@
+.opHeader{
+  width: 100%;
+  min-height: 88px;
+  background: #fff;
+  overflow: hidden;
+  .topBox{
+    width: 100%;
+    padding-top: 40px;
+  }
+  .iosC{
+    padding-top: constant(safe-area-inset-top);
+    padding-top: env(safe-area-inset-top);
+  }
+  .header{
+    display: flex;
+    align-items: center;
+    width: 100%;
+    min-height: 88px;
+    /*padding-top: constant(safe-area-inset-top);*/
+    /*padding-top: env(safe-area-inset-top);*/
+    .backBtn{
+      box-sizing: border-box;
+      width: 20%;
+      height: 88px;
+      line-height: 88px;
+      margin-left: 26px;
+      padding-left: 40px;
+      background: url("./../img/backBlack.png") no-repeat left center;
+      background-size: 18px 31px;
+      font-size: 32px;
+      color: #80808c;
+    }
+    .writeBack{
+      background: url("./../img/whiteBack.png") no-repeat left center / 18px 31px;
+    }
+    .title{
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 88px;
+      text-align: center;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      color: #80808c;
+      span{
+        width: 100%;
+        display: block;
+        line-height: 1.3;
+        font-size: 32px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .cornerMark{
+        width: 30px;
+        height: 30px;
+        vertical-align: middle;
+      }
+      .rotate180{
+        transform: rotateZ(180deg);
+      }
+    }
+    .rightIcon{
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+      box-sizing: border-box;
+      width: 20%;
+      height: 88px;
+      margin-right: 44px;
+      img:nth-child(1){
+        width: 38px;
+        height: 38px;
+      }
+      img:nth-child(2){
+        width: 42px;
+        height: 42px;
+        margin-left: 25px;
+      }
+    }
+  }
+}

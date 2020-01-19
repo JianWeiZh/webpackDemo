@@ -98,7 +98,9 @@ module.exports = {
               sourceMap: devMode
             }
           },
-          'postcss-loader',
+          {
+            loader: 'postcss-loader'
+          },
           {
             loader: 'sass-loader',
             options: {
