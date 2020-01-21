@@ -1,12 +1,11 @@
 :global{
-  *{
-    margin: 0;
-    padding: 0;
-  }
   html,body{
     width: 100%;
     height: 100%;
-    background: #f60;
+  }
+  p{
+    margin-block-start: 0;
+    margin-block-end: 0;
   }
   #app{
     width: 100%;

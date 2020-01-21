@@ -23,11 +23,17 @@ class Routers extends React.Component {
       <MyContext.Provider value={OpJsSdk}>
         <Router>
           <Switch>
-            {this.state.routers.map((item) => {
-              return item.path === '/' ?
-                <Route path={item.path} key={item.path} exact component={loadable(item.component)} />
-                :
-                <Route path={item.path} key={item.path} component={loadable(item.component)} />
+            {this.state.routers.map((route) => {
+              return <Route path={route.path} key={route.path} exact render={(props) => {
+                const title = route.meta.title
+                document.title = title
+                const RouteComponent = loadable(route.component)
+                return (
+                  <div>
+                    <RouteComponent title={title} {...props}/>
+                  </div>
+                )
+              }} />
             })}
           </Switch>
         </Router>

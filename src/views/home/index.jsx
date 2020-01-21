@@ -34,7 +34,7 @@ class Home extends React.PureComponent{
 
   render() {
     return <div className={style.box}>
-            <Header backTxt={this.state.backTxt} history={this.props.history}></Header>
+            <Header backTxt={this.state.backTxt} title={this.props.title} history={this.props.history}></Header>
             <div className={style.content}>
               <div className="iconfont iconright">按钮</div>
               我是home页

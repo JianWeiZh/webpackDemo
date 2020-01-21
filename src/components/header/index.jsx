@@ -26,7 +26,7 @@ class Header extends React.Component {
       return <div className={Style.opHeader}>
         {tabBar}
         <div className={Style.header}>
-          <div className={Style.backBtn} onClick={() => this.goBack()}>{this.props.backTxt}</div>
+          <div className={`${Style.backBtn} ${!this.props.hideBackBtn && Style.backIcon}`} onClick={() => this.goBack()}>{this.props.backTxt}</div>
           <div className={Style.title}>
             <span>{this.props.title}</span>
           </div>

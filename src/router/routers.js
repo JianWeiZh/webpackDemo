@@ -2,6 +2,7 @@ const routers = [
   {
     path: '/',
     component: 'App.jsx',
+    exact: true,
     meta: {
       title: 'App'
     }
@@ -9,6 +10,7 @@ const routers = [
   {
     path: '/home',
     component: 'views/home',
+    exact: false,
     meta: {
       title: 'Home'
     }
@@ -16,6 +18,7 @@ const routers = [
   {
     path: '/about',
     component: 'views/about',
+    exact: false,
     meta: {
       title: 'About'
     }

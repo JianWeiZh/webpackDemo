@@ -17,7 +17,7 @@ module.exports = {
     alias: {
       '@': path.join(__dirname, '../src')
     },
-    extensions: ['.js', '.jsx', '.css', '.scss', '.json']
+    extensions: ['.js', '.jsx', '.css', '.scss', '.less', '.json']
   },
   plugins: [
     new HtmlWebpackPlugin({
@@ -77,6 +77,7 @@ module.exports = {
       },
       {
         test: /\.(sa|sc|c)ss$/,
+        exclude: /node_modules\./,
         use: [
           {
             loader: MiniCssExtractPlugin.loader,
@@ -106,6 +107,60 @@ module.exports = {
             options: {
               implementation: require('dart-sass'),
               sourceMap: devMode
+            }
+          }
+        ]
+      }, {
+        test: /\.less$/,
+        exclude: [/src/],
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+              publicPath: '../',
+              esModule: true,
+              hmr: devMode,
+              reloadAll: devMode
+            }
+          },
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              importLoaders: 1
+            }
+          },
+          {
+            loader: require.resolve('postcss-loader')
+          },
+          {
+            loader: require.resolve('less-loader'),
+            options: {
+              modifyVars: { '@primary-color': '#1DA57A' },
+              javascriptEnabled: true
+            }
+          }
+        ]
+      },
+      {
+        test: /\.less$/,
+        exclude: [/node_modules/],
+        use: [
+          require.resolve('style-loader'),
+          {
+            loader: require.resolve('css-loader'),
+            options: {
+              modules: true,
+              localIdentName: '[local]_[hash:base64:8]'
+            }
+          },
+          {
+            loader: require.resolve('postcss-loader')
+          },
+          {
+            loader: require.resolve('less-loader'),
+            options: {
+              modifyVars: { '@primary-color': '#1DA57A' },
+              javascriptEnabled: true
             }
           }
         ]

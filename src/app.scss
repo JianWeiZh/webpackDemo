@@ -1,12 +1,46 @@
 .app{
   display: flex;
-  flex-direction: row;
-  line-height: 80px;
-  color: #fff;
-  .labelItem{
-    flex: 1;
-    text-align: center;
-    font-size: 48px;
+  flex-direction: column;
+  .tabBox{
+    margin: 20px 10px;
+  }
+  .todoListBox{
+    flex: auto;
+    height: auto;
+    overflow: auto;
+    .todoItem{
+      padding-left: 30px;
+      .closeBtn:before{
+        padding-right: 20px;
+      }
+    }
+    .activeItem{
+      font-weight: bold;
+      color: aquamarine;
+      .statusBtn{
+        float: right;
+      }
+    }
+    .activitedItem{
+      color: #80808c;
+    }
+  }
+  .bottomBox{
+    display: flex;
+    flex-direction: row;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    line-height: 88px;
+    background: #f30;
+    overflow: hidden;
     color: #fff;
+    .labelItem{
+      flex: 1;
+      text-align: center;
+      font-size: 48px;
+      color: #fff;
+    }
   }
 }
